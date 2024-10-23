@@ -1,13 +1,14 @@
 const express= require('express');
-
-
+const bodyParser=require('body-parser');
+const MasterRoute=require('./routes/master.routes');
+const mongoConnect=require('./config/mongodb');
 const app=express();
-require('dotenv');
+require('dotenv').config;
+app.use(bodyParser.json());
 port=process.env.PORT || 8000;
+mongoConnect();
 
-app.get('/',(req,res)=>{
-     res.send("working Server")
-})
+app.use('/api/v1', MasterRoute);
 
 
  
